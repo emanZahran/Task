@@ -1,0 +1,35 @@
+ :host ::ng-deep button {
+   margin-right: .5em;
+ }
+ 
+
+.sizes {
+  .p-inputtext {
+    display: block;
+    margin-bottom: .5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.p-field * {
+  display: block;
+}
+.content{
+  padding: 10px;
+}
+.d-align-items{
+  padding: 16px;
+}
+.pl-right{
+  float: right;
+}
+   button.ui-button {
+     margin-right: .5rem;
+   }
+   .float-input{
+         font-size: 14px !important;
+         font-weight: 500 !important;
+   }

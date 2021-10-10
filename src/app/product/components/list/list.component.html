@@ -1,0 +1,76 @@
+<div>
+  <p-button   (click)="showModalDialog()" icon="pi pi-external-link" label="Create new"></p-button>
+  <p-table [value]="products">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Product Type</th>
+        <th>Description</th>
+        <th>controls</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{product.Id}}</td>
+        <td>{{product.Name}}</td>
+        <td>{{product.Amount}}</td>
+        <td>{{product.ProductType.value}}</td>
+        <td>{{product.Description}}</td>
+        <td>
+          <button pButton pRipple type="button" label="Edit" (click)="showModalDialog(product)"
+            class="p-button-raised"></button>
+          <button pButton pRipple type="button" label="Delete" (click)="deleteProuct(product)"
+            class="p-button-raised p-button-danger"></button>
+
+        </td>
+
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-dialog header="Add new Product" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+    [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <form [formGroup]="myForm" autocomplete="off" *ngIf="displayModal">
+      <div class="content">
+        <div class="d-align-items">
+          <span class="p-float-label">
+            <input id="float-input" type="text" formControlName="Name" pInputText>
+            <label for="float-input">Name *</label>
+          </span>
+        </div>
+        <div class="d-align-items">
+          <span class="p-float-label">
+            <input id="float-input" type="number" formControlName="Amount" pInputText min="1">
+            <label for="float-input">Amount *</label>
+          </span>
+        </div>
+        <div class="d-align-items">
+          <span class="p-float-label">
+            <p-dropdown [style]="{ width: '22%' }" [autoDisplayFirst]=" false" id="float-select" [options]="productTypes"
+              formControlName="ProductType" optionLabel="label"
+              dataKey="value" [showClear]="true"></p-dropdown>
+            <label for="float-select">productTypes *</label>
+
+          </span>
+        </div>
+        <div class="d-align-items">
+          <span class="p-float-label">
+            <textarea id="float-input" rows="3" cols="100" formControlName="Description" pInputText>
+
+          </textarea>
+            <label for="float-input">Description *</label>
+          </span>
+        </div>
+      </div>
+    </form>
+    <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" *ngIf="myForm.controls['Id'].value == null" [disabled]="myForm.invalid"
+        (click)="add()" label="Save" class="p-button-text"></p-button>
+      <p-button icon="pi pi-check" *ngIf="myForm.controls['Id'].value > 0" [disabled]="myForm.invalid" (click)="edit()"
+        label="Edit" class="p-button-text"></p-button>
+      <p-button icon="pi pi-times" (click)="displayModal=false" label="Cancel"></p-button>
+    </ng-template>
+
+  </p-dialog>
+</div>
